@@ -1,0 +1,57 @@
+local player = game:GetService("Players").LocalPlayer
+local gui = Instance.new("ScreenGui")
+gui.IgnoreGuiInset = true
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(1, 0, 1, 0)
+frame.BackgroundColor3 = Color3.new(0, 0, 0)
+frame.Parent = gui
+
+local title = Instance.new("TextLabel")
+title.Text = "Dark Spawner"
+title.Size = UDim2.new(0, 200, 0, 50)
+title.Position = UDim2.new(0.5, -100, 0.4, -25)
+title.TextColor3 = Color3.new(1, 1, 1)
+title.BackgroundTransparency = 1
+title.Font = Enum.Font.SourceSansBold
+title.TextSize = 32
+title.Parent = frame
+
+local loadingBar = Instance.new("Frame")
+loadingBar.Size = UDim2.new(0.4, 0, 0, 20)
+loadingBar.Position = UDim2.new(0.3, 0, 0.6, 0)
+loadingBar.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+loadingBar.BorderSizePixel = 0
+loadingBar.Parent = frame
+
+local progress = Instance.new("Frame")
+progress.Size = UDim2.new(0, 0, 1, 0)
+progress.BackgroundColor3 = Color3.new(1, 1, 1)
+progress.BorderSizePixel = 0
+progress.Parent = loadingBar
+
+local loadText = Instance.new("TextLabel")
+loadText.Text = "Loading UI..."
+loadText.Size = UDim2.new(0, 200, 0, 30)
+loadText.Position = UDim2.new(0.5, -100, 0.65, 20)
+loadText.TextColor3 = Color3.new(1, 1, 1)
+loadText.BackgroundTransparency = 1
+loadText.Visible = false
+loadText.Font = Enum.Font.SourceSans
+loadText.TextSize = 20
+loadText.Parent = frame
+
+-- Fill loading bar
+for i = 1, 100 do
+    progress.Size = UDim2.new(i/100, 0, 1, 0)
+    task.wait(0.05)
+end
+
+loadText.Visible = true -- Show "Loading UI..." after reaching 100%
+
+-- Keep the screen stuck forever
+while true do
+    task.wait(1) -- Prevents infinite loop from crashing
+end
